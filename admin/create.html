@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="navbar.css">
+    <style>
+        #container {
+            width: 20%;
+            margin: auto;
+            margin-top: 50px;
+            padding: 30px;
+            box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px;
+            border-radius: 10px;
+        }
+
+        #container input {
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 10px;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            font-size: 18px;
+        }
+
+        select {
+            padding: 5px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar">
+        <div id="navbar_div">
+            <img id="logo" src="https://www.masaischool.com/img/navbar/logo.svg" onclick="window.location.href='admin.html'">
+            <div onclick="window.location.href='lecture.html'">Lectures</div>
+            <div onclick="window.location.href='Assignments.html'">Assignments</div>
+            <div>Quizzes</div>
+            <div>Tickets</div>
+            <div>Discussions</div>
+            <div>Notifications</div>
+            <div>Electives</div>
+        </div>
+        <div id="navbar_div2">
+            <div id="name"></div>
+            <button id="logout" onclick="window.location.href='./signup/login.html'">LOG OUT</button>
+        </div>
+    </div>
+    <div id="sub_navbar">
+        <div>Today's Schedule</div>
+    </div>
+    <div id="container">
+        <form>
+            <select id="LecAssign">
+                <option value="Select Type">Select Type</option>
+                <option value="Lecture">Lecture</option>
+                <option value="Assignment">Assignment</option>
+            </select>
+            <select id="Subject">
+                <option value="Select Subject">Select Subject</option>
+                <option value="Scrum">Scrum</option>
+                <option value="DSA">DSA</option>
+                <option value="CSBT">CSBT</option>
+                <option value="Coding">Coding</option>
+            </select>
+            <label>Enter Time</label>
+            <input type="time" id="time">
+            <label>Enter Date</label>
+            <input type="date" id="date">
+            <label>Instructor Name</label>
+            <input type="text" id="instructorname">
+            <input type="submit">
+    </div>
+    </form>
+</body>
+
+</html>
+<script src="navbar.js"></script>
+
+<script>
+    class lecture{
+        constructor(t,s,ti,d,n){
+            this.instructorname=n;
+            this.type=t;
+            this.subject=s;
+            this.time=ti;
+            this.date=d;
+        }
+    }
+    class assignment{
+        constructor(t,s,ti,d,n){
+            this.instructorname=n;
+            this.type=t;
+            this.subject=s;
+            this.time=ti;
+            this.date=d;
+        }
+    }
+
+let lec=JSON.parse(localStorage.getItem("lecture"))||[];
+let assign=JSON.parse(localStorage.getItem("assignment"))||[];
+    let form=document.querySelector("form");
+    form.addEventListener("submit",getdata);
+
+    function getdata(){
+        event.preventDefault();
+        let type=form.LecAssign.value;
+        let subject=form.Subject.value;
+        let time=form.time.value;
+        let date=form.date.value;
+        let name=form.instructorname.value;
+        
+        if(type=='Lecture'){
+            let c1=new lecture(type,subject,time,date,name);
+            console.log('c1:', c1)
+            lec.push(c1)
+            localStorage.setItem("lecture",JSON.stringify(lec))
+            alert("lecture Created")
+            window.location.reload();
+
+
+        }else{
+            let c1=new assignment(type,subject,time,date,name);
+            console.log('c1:', c1)
+            assign.push(c1);
+            localStorage.setItem("assignment",JSON.stringify(assign))
+            alert("Assignment Created")
+            window.location.reload();
+        }
+
+    }
+</script>

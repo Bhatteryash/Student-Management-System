@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="navbar.css">
+    <style>
+        table{
+            width:50%;
+            margin: auto;
+            border: 1px solid #bbb;
+            text-align: center;
+            margin-top: 50px;
+        }
+        table{
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        th, td{
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+        }
+        tbody tr td:last-child{
+            color: red;
+        }
+        tbody tr td:last-child:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body onload="append(data)">
+    <div id="navbar">
+        <div id="navbar_div">
+            <img id="logo" src="https://www.masaischool.com/img/navbar/logo.svg" onclick="window.location.href='admin.html'">
+            <div onclick="window.location.href='lecture.html'">Lectures</div>
+            <div onclick="window.location.href='Assignments.html'">Assignments</div>
+            <div>Quizzes</div>
+            <div>Tickets</div>
+            <div>Discussions</div>
+            <div>Notifications</div>
+            <div>Electives</div>
+        </div>
+        <div id="navbar_div2">
+            <div id="name"></div>
+            <button id="logout" onclick="window.location.href='../signup/login.html'">LOG OUT</button>
+        </div>
+    </div>
+    <div id="sub_navbar">
+        <div>Student List</div>
+        <div>
+            <button id="addstudent" onclick="window.location.href='addstudent.html'">Add Student</button>
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>MasaiId</th>
+                <th>Email</th>
+                <th>UserName</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+       
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+</html>
+<script src="navbar.js"></script>
+
+<script>
+    let data = JSON.parse(localStorage.getItem("student_data")) || [];
+    append=(data)=>{
+        let container=document.querySelector("tbody");
+        container.innerHTML=null;
+        data.forEach((el,i)=>{
+            let trs=document.createElement("tr");
+            let name=document.createElement("td");
+            name.innerText=el.Name;
+            let id=document.createElement("td");
+            id.innerText=el.masaiid;
+            let email=document.createElement("td");
+            email.innerText=el.email
+            let username=document.createElement("td");
+            username.innerText=el.username;
+            let button=document.createElement("td");
+            button.innerText='Remove';
+            button.addEventListener("click",()=>{
+                deletes(el,i);
+            })
+            trs.append(name,id,email,username,button);
+            container.append(trs);
+        })
+    }
+    deletes=(el,i)=>{
+        data.splice(i,1);
+        localStorage.setItem("student_data",JSON.stringify(data));
+        window.location.reload();
+    }
+</script>

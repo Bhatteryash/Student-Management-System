@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="navbar.css">
+    <style>
+        form{
+            /* border:1px solid transparent; */
+            width:25%;
+           padding:20px 25px 10px 25px;
+           box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+           line-height: 20px;
+            margin: auto;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        form>input{
+            width:100%;
+            margin:10px;
+            border: 1px solid #ccc;
+            margin-left: 0px;
+            padding:10px 10px;
+            border-radius: 5px;
+        }
+        #submit{
+            width:100%;
+            height: 40px;
+            text-align: center;
+            border-radius: 10px;
+            border: 0px;
+            color: gray;
+            font-weight: 600;
+         }
+         h2{
+             text-align: center;
+             color: black;
+         }
+         #submit:hover{
+             background-color: gray;
+             color: white;
+         }
+    </style>
+</head>
+
+<body>
+    <div id="navbar">
+        <div id="navbar_div">
+            <img id="logo" src="https://www.masaischool.com/img/navbar/logo.svg" onclick="window.location.href='admin.html'">
+            <div onclick="window.location.href='lecture.html'">Lectures</div>
+            <div onclick="window.location.href='Assignments.html'">Assignments</div>
+            <div>Quizzes</div>
+            <div>Tickets</div>
+            <div>Discussions</div>
+            <div>Notifications</div>
+            <div>Electives</div>
+        </div>
+        <div id="navbar_div2">
+            <div id="name"></div>
+            <button id="logout" onclick="window.location.href='../signup/login.html'">LOG OUT</button>
+        </div>
+    </div>
+    <div id="sub_navbar">
+        <div>Add Student</div>
+    </div>
+    <form>
+        <label>Name</label><br>
+        <input type="text" placeholder="Enter Name" id="name"><br>
+        <label>Masai-Id</label><br>
+        <input type="text" placeholder="Enter Id" id="masaiid"><br>
+        <label>Email</label><br>
+        <input type="text" placeholder="Enter Email" id="mail"><br>
+        <label>username</label><br>
+        <input type="text" placeholder="Enter Username" id="username"><br>
+        <label>Password</label><br>
+        <input type="text" placeholder="Enter Password" id="pass"><br>
+            <input type="submit" value="Sign up" id="submit">
+    </form>
+</body>
+</html>
+<script src="navbar.js"></script>
+
+<script>
+    let data = JSON.parse(localStorage.getItem("student_data")) || [];
+    let students_array = JSON.parse(localStorage.getItem("Login_data")) || [];
+    class user{
+        constructor(n,i,e){
+            this.Name=n;
+            this.masaiid=i;
+            this.email=e;
+        }
+        signup(username,password){
+            let isvalidated=false;
+    
+            isvalidated=this.#validateusername(username) && this.#validatepassword(password);
+            if(isvalidated){
+                this.username=username;
+                this.password=password;
+                alert ('user registered succesfully!')
+                students_array.push(this);
+                data.push(this);
+                localStorage.setItem("student_data",JSON.stringify(data));
+                localStorage.setItem("Login_data",JSON.stringify(students_array));
+                window.location.reload();
+            }else{
+                alert ('Please follow username or password rules')
+            }
+        }
+        #validateusername(username){
+            if(username.includes('#')==false){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        #validatepassword(password){
+            if(password.length>7){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    
+    let form=document.querySelector("form");
+    form.addEventListener("submit",getdata);
+    
+    function getdata(){
+        event.preventDefault();
+        let name=form.name.value;
+        let id=form.masaiid.value;
+        let mail=form.mail.value;
+        let username=form.username.value;
+        let password=form.pass.value;
+    
+        let s1=new user(name,id,mail);
+        let flag=s1.signup(username,password);
+        
+    }
+    
+    console.log('students_array:', students_array);
+</script>

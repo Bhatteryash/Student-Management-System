@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="navbar.css">
+    <style>
+        #container {
+            width: 80%;
+            margin: auto;
+            margin-top: 50px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            padding: 20px;
+           
+            border-radius: 10px;
+
+        }
+
+        #container>div {
+            box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+            padding: 20px;
+            line-height: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #container>div button{
+            padding:5px 20px;
+            border-radius: 5px;
+            border: 1px solid #7b46e6;
+            color: #7b46e6;
+        }
+        #container>div button:hover{
+            color: red;
+            cursor: pointer;
+
+        }
+        p {
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body onload="append(lec)">
+    <div id="navbar">
+        <div id="navbar_div">
+            <img id="logo" src="https://www.masaischool.com/img/navbar/logo.svg"
+            onclick="window.location.href='admin.html'">
+            <div onclick="window.location.href='lecture.html'">Lectures</div>
+            <div onclick="window.location.href='Assignments.html'">Assignments</div>
+            <div>Quizzes</div>
+            <div>Tickets</div>
+            <div>Discussions</div>
+            <div>Notifications</div>
+            <div>Electives</div>
+        </div>
+        <div id="navbar_div2">
+            <div id="name"></div>
+            <button id="logout" onclick="window.location.href='./signup/login.html'">LOG OUT</button>
+        </div>
+    </div>
+    <div id="sub_navbar">
+        <div>LECTURES</div>
+        <div>
+            <button id="create" onclick="window.location.href='create.html'">Create Lecture</button>
+        </div>
+    </div>
+    <div id="container"></div>
+
+</body>
+
+</html>
+<script src="navbar.js"></script>
+
+<script>
+    let lec = JSON.parse(localStorage.getItem("lecture")) || [];
+
+    append = (lec) => {
+        let container = document.getElementById("container");
+        container.innerHTML = null;
+        lec.forEach((el,i) => {
+            let head = document.createElement("h2");
+            head.innerText = `${el.subject} ${el.date}`;
+            head.style.color = "#7b46e6";
+            let base = document.createElement("p");
+            base.innerText = `${el.instructorname} Scheduled class at ${el.time}`
+           
+            let remove = document.createElement("button");
+            remove.innerText = "Remove";
+            remove.addEventListener("click", function () {
+                deletes(i);
+            })
+            let div1s = document.createElement("div");
+            div1s.append(remove)
+            let divs = document.createElement("div");
+            divs.append(head, base);
+            let div2s = document.createElement("div");
+            div2s.append(divs,div1s)
+            container.append(div2s);
+        })
+    }
+
+    deletes=(i)=>{
+        lec.splice(i,1);
+        localStorage.setItem("lecture",JSON.stringify(lec))
+        window.location.reload();
+    }
+</script>

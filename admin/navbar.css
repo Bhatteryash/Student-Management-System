@@ -1,0 +1,74 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Roboto, Arial, sans-serif;
+}
+#navbar{
+    width: 99.9%;
+    height:70px;
+    display: flex;
+    border: 1px solid #ccc;
+   justify-content: space-around;
+}
+#navbar_div{
+    width:60%;
+    display: flex;
+    justify-content: space-between;
+    color: #aaa;
+    margin-left: 100px;
+    align-items: center;
+}
+#logo{
+    height:40px;
+}
+#navbar_div>div{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+}
+#navbar_div>div:hover{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 0px 0px;
+}
+#navbar_div2{
+    width:20%;
+    display: flex;
+   justify-content: space-around;
+    color: #aaa;
+    align-items: center;
+}
+
+#logout{
+    padding:0px 15px;
+    height:60%;
+    color: red;
+    background-color: transparent;
+    border: 1px solid #ccc;
+}
+#logout:hover{
+    text-decoration: underline;
+    color: white;
+    background-color: red;
+}
+#sub_navbar{
+    width:99.9%;
+    height:70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0px 150px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+#sub_navbar>div:nth-child(1){
+    font-size: 20px;
+    font-weight: 700;
+}
+#sub_navbar button{
+    background-color: #1f2937;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    padding:5px 15px;
+    border-radius: 7px;
+}

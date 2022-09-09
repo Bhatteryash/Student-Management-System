@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="navbar.css">
+    <style>
+        #container{
+            width:80%;
+            margin:auto;
+            margin-top: 50px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            padding: 20px;
+            border-radius: 10px;
+           
+        }
+        #container>div{
+            display: flex;
+            box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+            padding:20px;
+            line-height: 20px;
+            align-items: center;
+        }
+        .color_box{
+            width:12%;
+            padding:20px ;
+            text-align: center;
+            margin-right: 10px;
+            font-size: 18px;
+            line-height: 25px;
+        }
+        
+    </style>
+</head>
+
+<body onload="append(data)">
+    <div id="navbar">
+        <div id="navbar_div">
+            <img id="logo" src="https://www.masaischool.com/img/navbar/logo.svg"  onclick="window.location.href='student.html'">
+            <div onclick="window.location.href='lecture.html'">Lectures</div>
+            <div onclick="window.location.href='Assignments.html'">Assignments</div>
+            <div>Quizzes</div>
+            <div>Tickets</div>
+            <div>Discussions</div>
+            <div>Notifications</div>
+            <div>Electives</div>
+        </div>
+            <div id="navbar_div2">
+                <div id="name"  onclick="window.location.href='Profile.html'"></div>
+                <button id="logout" onclick="window.location.href='../signup/login.html'">LOG OUT</button>
+            </div>
+    </div>
+    <div id="sub_navbar">
+        <div>Today's Schedule</div>
+        <div>
+            <button id="create">BookMarks</button>
+            <button id="student_list">Refer & Earn</button>
+        </div>
+    </div>
+    <div id="container"></div>
+</body>
+
+</html>
+<script src="navbar.js"></script>
+<script>
+
+    let lec=JSON.parse(localStorage.getItem("lecture"))||[];
+    let assign=JSON.parse(localStorage.getItem("assignment"))||[];
+    let data=[...lec,...assign];
+    console.log('data:', data);
+
+    append=(data)=>{
+        let container=document.getElementById("container");
+        container.innerHTML=null;
+        data.forEach((el,i)=>{
+            let time=document.createElement("h3");
+            time.innerText=el.time;
+            let type=document.createElement("p");
+            type.innerText=el.type;
+            let divs=document.createElement("div");
+            divs.append(time,type);
+            divs.setAttribute("class","color_box")
+            divs.style.color="white";
+            
+            let subject=document.createElement("h2");
+            subject.innerText=`${el.subject} ${el.date}`
+            let name=document.createElement("p");
+            name.innerText=`${el.instructorname} Starting at ${el.time}`;
+            if(el.type=='Lecture'){
+                divs.style.backgroundColor="#6366f1";
+                subject.style.color="#6366f1"
+            }else{
+                divs.style.backgroundColor="#d946ef";
+                subject.style.color="#d946ef"
+            }       
+            let div1s=document.createElement("div");
+            div1s.append(subject,name);
+            let div2s=document.createElement("div");
+            div2s.setAttribute("class","box");
+            div2s.append(divs,div1s)
+            container.append(div2s);
+        })
+    }
+
+
+</script>

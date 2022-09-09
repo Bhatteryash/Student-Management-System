@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="navbar.css">
+    <style>
+        #profile_container {
+            width: 20%;
+            margin: auto;
+            margin-top: 50px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h3 {
+            margin-top: 5px;
+            margin-bottom:5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar">
+        <div id="navbar_div">
+            <img id="logo" src="https://www.masaischool.com/img/navbar/logo.svg"
+            onclick="window.location.href='student.html'">
+            <div onclick="window.location.href='lecture.html'">Lectures</div>
+            <div onclick="window.location.href='Assignments.html'">Assignments</div>
+            <div>Quizzes</div>
+            <div>Tickets</div>
+            <div>Discussions</div>
+            <div>Notifications</div>
+            <div>Electives</div>
+        </div>
+        <div id="navbar_div2">
+            <div id="name" onclick="window.location.href='Profile.html'"></div>
+            <button id="logout" onclick="window.location.href='../signup/login.html'">LOG OUT</button>
+        </div>
+    </div>
+    <div id="sub_navbar">
+        <div>Profile</div>
+    </div>
+    <div id="profile_container">
+        <h3>Name: - </h3>
+        <span id="user"></span>
+        <h3>MasaiId: - </h3>
+        <span id="masaiid"></span>
+
+        <h3>Email: - </h3>
+        <span id="mail"></span>
+        <h3>UserName: - </h3>
+        <span id="username"></span>
+    </div>
+
+</body>
+
+</html>
+<script src="navbar.js"></script>
